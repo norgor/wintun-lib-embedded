@@ -55,9 +55,7 @@ func byteize(data []byte) string {
 
 func runWithOut(cmd *exec.Cmd) (out string, err error) {
 	outb, err := cmd.CombinedOutput()
-	log.Printf(">> %s", cmd.String())
 	out = string(outb)
-	log.Printf("<< %s", out)
 	code := cmd.ProcessState.ExitCode()
 	if code != -1 && code != 0 {
 		return "", fmt.Errorf("exit code %d: %s", code, out)
@@ -135,13 +133,13 @@ func generateFileForArch(arch string, binary []byte) error {
 	return nil
 }
 
-func hasUncomittedChanges() (bool, error) {
+func hasUncommittedChanges() (bool, error) {
 	cmd := exec.Command("git", "status", "--porcelain=v1")
 	out, err := runWithOut(cmd)
 	if err != nil {
 		return false, fmt.Errorf("unable to check git status: %w", err)
 	}
-	return strings.ContainsAny(strings.TrimSpace(out), "\n"), nil
+	return len(strings.TrimSpace(out)) > 0, nil
 }
 
 func pushToGit(ver string) error {
@@ -197,7 +195,7 @@ func main() {
 		}
 	}
 
-	hasChanges, err := hasUncomittedChanges()
+	hasChanges, err := hasUncommittedChanges()
 	if err != nil {
 		log.Fatalf("unable to check for uncommitted changes: %v", err)
 	}
