@@ -163,7 +163,7 @@ func pushToGit(ver string) error {
 }
 
 func main() {
-	log.Println("identifying latest Wintun vesrion...")
+	log.Println("identifying latest Wintun version...")
 	ver, err := identifyLatestVersion()
 	if err != nil {
 		log.Fatalf("unable to identify latest Wintun version")
