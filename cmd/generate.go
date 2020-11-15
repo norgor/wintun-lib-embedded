@@ -55,7 +55,9 @@ func byteize(data []byte) string {
 
 func runWithOut(cmd *exec.Cmd) (out string, err error) {
 	outb, err := cmd.CombinedOutput()
+	log.Printf(">> %s", cmd.String())
 	out = string(outb)
+	log.Printf("<< %s", out)
 	code := cmd.ProcessState.ExitCode()
 	if code != -1 && code != 0 {
 		return "", fmt.Errorf("exit code %d: %s", code, out)
