@@ -197,7 +197,7 @@ func main() {
 
 	hasChanges, err := hasUncomittedChanges()
 	if err != nil {
-		log.Fatalf("unable to check for uncommited changes: %v", err)
+		log.Fatalf("unable to check for uncommitted changes: %v", err)
 	}
 
 	if hasChanges {
