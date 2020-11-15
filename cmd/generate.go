@@ -21,7 +21,7 @@ import (
 
 const gitRepo = "git://git.zx2c4.com/wintun"
 const gitDir = ".git-wintun"
-const generateDir = "pkg"
+const generateDir = "."
 
 var outputPath = fmt.Sprintf("./embedded/binary_%s_%s.go", runtime.GOOS, runtime.GOARCH)
 var goarchToWintunArch = map[string]string{
