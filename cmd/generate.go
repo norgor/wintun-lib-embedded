@@ -160,7 +160,7 @@ func pushToGit(ver string) error {
 		return fmt.Errorf("unable to push: %w", err)
 	}
 	tagPushCmd := exec.Command("git", "push", "origin", ver)
-	if _, err := runWithOut(pushCmd); err != nil {
+	if _, err := runWithOut(tagPushCmd); err != nil {
 		return fmt.Errorf("unable to push tag: %w", err)
 	}
 	return nil
