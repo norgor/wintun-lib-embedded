@@ -4,3 +4,6 @@
 # wintun-lib-embedded
 ## What is it?
 The wintun-lib-embedded package contains the Wintun binaries embedded inside the source code. The binaries can be written to file and loaded dynamically. This removes the need for bundling the library with the application.
+
+## Uses
+ - Wintun, Copyright © 2018-2020 WireGuard LLC. All Rights Reserved.
