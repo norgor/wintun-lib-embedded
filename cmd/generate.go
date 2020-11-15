@@ -155,7 +155,7 @@ func pushToGit(ver string) error {
 	if _, err := runWithOut(tagCmd); err != nil {
 		return fmt.Errorf("unable to create git tag: %w", err)
 	}
-	pushCmd := exec.Command("git", "push")
+	pushCmd := exec.Command("git", "push", "--follow-tags")
 	if _, err := runWithOut(pushCmd); err != nil {
 		return fmt.Errorf("unable to push: %w", err)
 	}
