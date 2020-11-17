@@ -80,7 +80,30 @@ func identifyLatestVersion() (string, error) {
 	if err := os.RemoveAll(gitDir); err != nil {
 		return "", fmt.Errorf("failed to remove Wintun's git directory: %s", err)
 	}
-	return strings.TrimSpace(verOut), nil
+
+	normVer, err := normalizeVersion(verOut)
+	if err != nil {
+		return "", fmt.Errorf("failed to normalize version: %w", err)
+	}
+
+	return normVer, nil
+}
+
+func normalizeVersion(ver string) (string, error) {
+	trimVer := strings.TrimSpace(ver)
+	if trimVer == "" {
+		return "", fmt.Errorf("invalid version '%s'", trimVer)
+	}
+	split := strings.SplitN(trimVer, ".", 3)
+	for i := len(split) - 1; i < 3; i++ {
+		split = append(split, "0")
+	}
+	return fmt.Sprintf(
+		"v%s.%s.%s",
+		split[0],
+		split[1],
+		strings.ReplaceAll(split[2], ".", "_"),
+	), nil
 }
 
 func downloadUrl(version string) string {
@@ -126,7 +149,7 @@ func generateFileForArch(arch string, binary []byte) error {
 	if err != nil {
 		return fmt.Errorf("unable to format template output: %w", err)
 	}
-	fname := filepath.Join(generateDir, fmt.Sprintf("%s.go", arch))
+	fname := filepath.Join(generateDir, fmt.Sprintf("lib_windows_%s.go", arch))
 	if err := ioutil.WriteFile(fname, fmtOut, os.ModePerm); err != nil {
 		return fmt.Errorf("unable to write output file: %w", err)
 	}
