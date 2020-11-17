@@ -151,7 +151,7 @@ func pushToGit(ver string) error {
 	if _, err := runWithOut(commitCmd); err != nil {
 		return fmt.Errorf("unable to create commit: %w", err)
 	}
-	tagCmd := exec.Command("git", "tag", "-f", "-a", ver, "-m", fmt.Sprintf("Wintun version %s", ver))
+	tagCmd := exec.Command("git", "tag", "-f", "-a", fmt.Sprintf("v%s", ver), "-m", fmt.Sprintf("Wintun version %s", ver))
 	if _, err := runWithOut(tagCmd); err != nil {
 		return fmt.Errorf("unable to create git tag: %w", err)
 	}
