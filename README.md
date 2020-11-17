@@ -1,4 +1,4 @@
-[![PkgGoDev](https://pkg.go.dev/badge/norgor/wintun-lib-embedded)](https://pkg.go.dev/norgor/wintun-lib-embedded)
+[![PkgGoDev](https://pkg.go.dev/badge/norgor/wintun-lib-embedded)](https://pkg.go.dev/github.com/norgor/wintun-lib-embedded)
 [![Go Report Card](https://goreportcard.com/badge/github.com/norgor/wintun-lib-embedded)](https://goreportcard.com/report/github.com/norgor/wintun-lib-embedded)
 
 # wintun-lib-embedded
