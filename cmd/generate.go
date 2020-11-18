@@ -99,7 +99,7 @@ func normalizeVersion(ver string) (string, error) {
 		split = append(split, "0")
 	}
 	return fmt.Sprintf(
-		"v%s.%s.%s",
+		"%s.%s.%s",
 		split[0],
 		split[1],
 		strings.ReplaceAll(split[2], ".", "_"),
