@@ -80,13 +80,7 @@ func identifyLatestVersion() (string, error) {
 	if err := os.RemoveAll(gitDir); err != nil {
 		return "", fmt.Errorf("failed to remove Wintun's git directory: %s", err)
 	}
-
-	normVer, err := normalizeVersion(verOut)
-	if err != nil {
-		return "", fmt.Errorf("failed to normalize version: %w", err)
-	}
-
-	return normVer, nil
+	return strings.TrimSpace(verOut), nil
 }
 
 func normalizeVersion(ver string) (string, error) {
@@ -107,6 +101,7 @@ func normalizeVersion(ver string) (string, error) {
 }
 
 func downloadUrl(version string) string {
+	log.Printf("downloading version %s", version)
 	return fmt.Sprintf("https://www.wintun.net/builds/wintun-%s.zip", version)
 }
 
@@ -192,13 +187,18 @@ func pushToGit(ver string) error {
 
 func main() {
 	log.Println("identifying latest Wintun version...")
-	ver, err := identifyLatestVersion()
+	wtver, err := identifyLatestVersion()
 	if err != nil {
 		log.Fatalf("unable to identify latest Wintun version")
 	}
 
-	log.Printf("found ver %s! downloading...", ver)
-	url := downloadUrl(ver)
+	ver, err := normalizeVersion(wtver)
+	if err != nil {
+		log.Fatalf("failed to normalize version: %v", err)
+	}
+
+	log.Printf("found ver %s (normalized %s)! downloading...", wtver, ver)
+	url := downloadUrl(wtver)
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("downloading Wintun failed: %v", err)
