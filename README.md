@@ -7,3 +7,6 @@ The wintun-lib-embedded package contains the Wintun binaries embedded inside the
 
 ## Uses
  - Wintun, Copyright © 2018-2020 WireGuard LLC. All Rights Reserved.
+ 
+## NOTE
+This library embeds Wintun, which has it's own license. All usage **must** comply with the Wintun library's license. The license can be found at [https://www.wintun.net/](https://www.wintun.net/).
